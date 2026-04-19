@@ -1,20 +1,34 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-export default function App() {
+import Question from './components/Question';
+import Summary from './components/Summary';
+import questions from './data';
+
+const Stack = createStackNavigator();
+
+// These options remove the back button and disable the swipe-back gesture
+const noBackOptions = {
+  headerLeft: () => null,
+  gestureEnabled: false,
+};
+
+function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Question"
+          component={Question}
+          options={{ ...noBackOptions, title: 'How well do you know Cinnamoroll?' }}
+          initialParams={{ data: questions, index: 0, answers: [] }}
+        />
+        <Stack.Screen name="Summary" component={Summary} options={noBackOptions} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
+export { Question, Summary };
