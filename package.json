@@ -8,7 +8,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "predeploy": "expo export --platform web && node patch-index.js",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist --dotfiles"
   },
   "homepage": "https://maryeberry.github.io/reactquiz",
   "dependencies": {
